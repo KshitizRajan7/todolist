@@ -61,7 +61,6 @@ const List: React.FC<ListProps> = ({
 
   const renderTasks = (taskList: Task[]) =>
     taskList.map((task, index) => (
-      <div>
         <div
           key={task.id}
           className={`flex gap-1 ${
@@ -114,7 +113,6 @@ const List: React.FC<ListProps> = ({
 
           <hr />
         </div>
-      </div>
     ));
 
   return (
