@@ -15,17 +15,17 @@ const Search: React.FC<headerProp> = ({ onSearch }) => {
   };
 
   return (
-    <div className="w-[360px] h-[38px] md:w-[595px] md:h-[38px] rounded-[5px] border dark:border-white border-black items-center p-2">
+    <div className=" w-[200px] h-[35px] md:w-[595px] md:h-[38px] rounded-[5px] border dark:border-white border-black items-center p-2">
       <form className="flex" action="" onSubmit={handleSubmit}>
         <input
           value={searchData}
           onChange={handleChange}
-          className="md:w-[595px] md:h-[16px] border-none outline-none dark:bg-gray-900 dark:text-white"
+          className="md:w-[595px] md:h-[16px] w-[160px] h-[15px] border-none outline-none dark:bg-gray-900 dark:text-white"
           type="text"
           placeholder="search note"
         />
         <button type="submit" className="border-none outline-none">
-          <FaSearch className=" w-[21px] h-[21px] cursor-pointer dark:text-white" />
+          <FaSearch className=" md:w-[21px] md:h-[21px] w-[30px] h-[15px] cursor-pointer dark:text-white" />
         </button>
       </form>
     </div>

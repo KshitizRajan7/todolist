@@ -17,8 +17,8 @@ const Head: React.FC<headerProp> = ({ onSearch, onSelect }) => {
     }
   };
   return (
-    <div className="w-[360px] h-[135px] md:w-[750px] md:h-[135px] pt-[40px] flex flex-col items-center">
-      <h1 className="w-[150px] h-[39px] md:w-[150px] md:h-[39px]  text-[26px] font-kanit font-semibold leading-[38.87px] dark:text-white">
+    <div className=" w-[320px] h-[135px] md:w-[750px] md:h-[135px] pt-[40px] flex flex-col items-center">
+      <h1 className="w-[150px] h-[39px] md:w-[150px] md:h-[39px] text-[20px] md:text-[26px] font-kanit font-semibold leading-[38.87px] dark:text-white">
         TODO LIST
       </h1>
       <Header onSearch={handleSearch} onSelect={handleSelect} />

@@ -34,7 +34,7 @@ const UpdateModal: React.FC<buttons> = ({
       setCompleted(task?.completed || false);
       setTaskId(task?.id || 0);
     }
-  }, [newTodos]);
+  }, [newTodos,updateId]);
   const outsideFormClose = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
