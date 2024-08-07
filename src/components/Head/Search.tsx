@@ -15,7 +15,7 @@ const Search: React.FC<headerProp> = ({ onSearch }) => {
   };
 
   return (
-    <div className=" w-[200px] h-[35px] md:w-[595px] md:h-[38px] rounded-[5px] border dark:border-white border-black items-center p-2">
+    <div className=" w-[200px] h-[35px] md:w-[500px] md:h-[38px] rounded-[5px] border dark:border-white border-black items-center p-2">
       <form className="flex" action="" onSubmit={handleSubmit}>
         <input
           value={searchData}

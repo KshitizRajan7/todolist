@@ -2,6 +2,7 @@ import React, { useState } from "react";
 export interface buttons {
   onClose: () => void;
   onApply: (newTodo: Todo) => void;
+  userID :number;
 }
 
 export interface Todo {
@@ -11,7 +12,7 @@ export interface Todo {
   completed: boolean;
 }
 
-const Modal: React.FC<buttons> = ({ onClose, onApply }) => {
+const Modal: React.FC<buttons> = ({ onClose, onApply, userID }) => {
   const [title, setTitle] = useState("");
   const outsideFormClose = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -29,11 +30,12 @@ const Modal: React.FC<buttons> = ({ onClose, onApply }) => {
 
   const handleApply = () => {
     const newTodo: Todo = {
-      userId: 11,
+      userId: userID,
       id: Math.floor(Math.random() * 1000000),
       title: title,
       completed: false,
     };
+    console.log(userID);
     if (!title) {
       alert("Note is empty");
       return;

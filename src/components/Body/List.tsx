@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Link from "next/link";
 import detective from "../../image/detective.png";
 import { RiDeleteBin5Line } from "react-icons/ri";
@@ -15,7 +15,8 @@ export type Task = {
 
 interface ListProps {
   //the interface defines the structure of props that will be in the component that uses this interface
-  tasks: Task[]; //takes array of Task object
+  userId: number;
+  // tasks: Task[]; //takes array of Task object
   newTodos: Task[];
   searchTask: string;
   selectTask: string;
@@ -24,7 +25,8 @@ interface ListProps {
   handleCheckboxChange: (id: number) => void;
 }
 
-const List: React.FC<ListProps> = ({
+const List: React.FC<ListProps> = React.memo (({
+  userId,
   handleCheckboxChange,
   newTodos,
   searchTask,
@@ -43,7 +45,9 @@ const List: React.FC<ListProps> = ({
     setHoveredTaskId(null);
   };
 
-  const FilterNewTodo = newTodos.filter((newtodo) =>
+  const userTasks = newTodos.filter(task=> task.userId === userId);
+
+  const FilterNewTodo = userTasks.filter((newtodo) =>
     newtodo.title.toLowerCase().includes(searchTask.toLowerCase())
   );
 
@@ -83,7 +87,6 @@ const List: React.FC<ListProps> = ({
             <div className="  max-w-[150px] md:max-w-[300px] p-4 overflow-hidden text-ellipsis whitespace-nowrap ">
               <Link
                 href="#"
-                key={task.id}
                 className={`text-base ${task.completed ? "line-through" : ""}`}
               >
                 {task.title}
@@ -95,14 +98,12 @@ const List: React.FC<ListProps> = ({
               }`}
             >
               <button
-                key={task.id}
                 className="cursor-pointer hover:text-green-500"
                 onClick={() => handleUpdate(task.id)}
               >
                 <GoPencil />
               </button>
               <button
-                key={task.id}
                 className="cursor-pointer hover:text-red-500"
                 onClick={() => handleRemove(task.id)}
               >
@@ -139,6 +140,6 @@ const List: React.FC<ListProps> = ({
       </div>
     </div>
   );
-};
+});
 
 export default List;
