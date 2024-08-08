@@ -117,7 +117,6 @@ const Body: React.FC<BodyProps> = ({ searchTask, selectTask }) => {
           handleRemove={handleRemove}
           handleUpdate={handleUpdate}
           handleCheckboxChange={handleCheckboxChange}
-          tasks={tasks}
           newTodos={newTodos}
           searchTask={searchTask}
           selectTask={selectTask}
@@ -135,7 +134,9 @@ const Body: React.FC<BodyProps> = ({ searchTask, selectTask }) => {
           newTodos={newTodos}
           onClose={() => handleCloseButtonClick()}
         />
+        
       )}
+
     </Fragment>
   );
 };
