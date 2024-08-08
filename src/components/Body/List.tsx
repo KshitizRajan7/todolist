@@ -4,6 +4,7 @@ import Link from "next/link";
 import detective from "../../image/detective.png";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { GoPencil } from "react-icons/go";
+import Image from "next/image";
 
 export type Task = {
   //type task that defines object with properties as follows
@@ -129,7 +130,7 @@ const List: React.FC<ListProps> = React.memo (({
           renderTasks(filteredTasksBySelect)
         ) : (
           <div className="md:w-[221px] md:h-[174px]">
-            <img src={detective.src} alt="No task" />
+            <Image src={detective.src} alt="No task" />
             <div className="flex justify-center items-center ">
               <p className="md:w-[69px] md:h-[20px] font-normal font-kaint dark:text-white text-black text-[20px] leading-5">
                 Empty...
