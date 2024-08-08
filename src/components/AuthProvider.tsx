@@ -1,19 +1,20 @@
 "use client";
-import { useState, useEffect, createContext, useContext, useCallback } from "react";
+import React, { useState, useEffect, createContext, useContext, useCallback } from "react";
 import CryptoJS from "crypto-js";
 import LoginModal from "@/components/LoginModal";
 import RegistrationModal from "./RegistrationModal";
+import bg from  '../image/todolistwall1.jpg'
 
-interface User{
+interface User {
   userID: number;
   username: string;
-  password:string;
+  password: string;
 }
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  userId:number | null;
-  userName:string | null;
+  userId: number | null;
+  userName: string | null;
   login: (username: string, password: string) => void;
   logout: () => void;
   register: (username: string, password: string) => void;
@@ -32,27 +33,29 @@ export const useAuth = () => {
 const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isAuthenticated, setAuthenticated] = useState(false);
-  const [userId, setUserId] =useState<number | null> (null);
-  const [userName, setUserName] =useState<string | null> (null);
+  const [userId, setUserId] = useState<number | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
   const [isRegistrationModalOpen, setRegistrationModalOpen] = useState(false);
-  console.log(userName);
+
   useEffect(() => {
     const authStatus = localStorage.getItem("isAuthenticated");
     if (authStatus === "true") {
-      const storedUser = localStorage.getItem("users");
-      if(storedUser){
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
         const user = JSON.parse(storedUser);
-      setUserId(user.userID);}
-      setAuthenticated(true);
+        setUserId(user.userID);
+        setUserName(user.username);
+        setAuthenticated(true);
+      }
     } else {
       setLoginModalOpen(true);
     }
   }, []);
 
-  const handleLogin = useCallback ((username: string, password: string) => {
-    const users: User[]= JSON.parse(localStorage.getItem("users") || "[]");
+  const handleLogin = useCallback((username: string, password: string) => {
+    const users: User[] = JSON.parse(localStorage.getItem("users") || "[]");
     const hashedPassword = CryptoJS.SHA256(password).toString();
-    const user = users.find((u: any) => u.username === username && u.password === hashedPassword);
+    const user = users.find((u) => u.username === username && u.password === hashedPassword);
 
     if (user) {
       localStorage.setItem("isAuthenticated", "true");
@@ -64,52 +67,57 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     } else {
       alert("Invalid credentials");
     }
-  },[]);
-  
+  }, []);
 
   const handleRegister = (username: string, password: string) => {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
     const hashedPassword = CryptoJS.SHA256(password).toString(); 
-    if (users.find((u: any) => u.username === username)) {
+    if (users.find((u:any) => u.username === username)) {
       alert("User already exists");
     } else {
       const newUser = {
-        userID:Math.floor(Math.random() * 1000000),
+        userID: Math.floor(Math.random() * 1000000),
         username,
-        password:hashedPassword,
+        password: hashedPassword,
       };
       users.push(newUser);
       localStorage.setItem("users", JSON.stringify(users));
       alert("Registration successful. Please log in.");
       setRegistrationModalOpen(false);
-      setLoginModalOpen(true); // Open login modal after registration
+      setLoginModalOpen(true);
     }
   };
 
-  const handleCloseLoginModal = () => {
-    setLoginModalOpen(false);
-  };
+  const handleCloseLoginModal = () => setLoginModalOpen(false);
 
-  const handleCloseRegistrationModal = () => {
-    setRegistrationModalOpen(false);
-  };
+  const handleCloseRegistrationModal = () => setRegistrationModalOpen(false);
 
-  const openLoginModal = () => {
-    setLoginModalOpen(true);
-  };
+  const openLoginModal = () => setLoginModalOpen(true);
 
   const openRegistrationModal = () => {
     setLoginModalOpen(false);
     setRegistrationModalOpen(true);
   };
-   const logout = () => {
+
+  const logout = () => {
     localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("user");
     setAuthenticated(false);
+    setUserId(null);
+    setUserName(null);
     setLoginModalOpen(true);
   };
 
+  const containerStyle = {
+    backgroundImage: `url(${bg.src})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh', // Full viewport height
+    width: '100vw',  // Full viewport width
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, userId,userName, login: handleLogin, logout, register: handleRegister }}>
+    <AuthContext.Provider value={{ isAuthenticated, userId, userName, login: handleLogin, logout, register: handleRegister }}>
       <LoginModal
         isOpen={isLoginModalOpen && !isAuthenticated}
         onClose={handleCloseLoginModal}
@@ -122,12 +130,12 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
         onRegister={handleRegister}
       />
       {isAuthenticated ? children : (
-        <div className="text-center h-full w-screen flex flex-col justify-center items-center">
-          <h1 className="font-kaint font-bold ">To-Do list</h1>
-          <p>Please log in to access the app.</p>
-          <button onClick={openLoginModal} className="bg-green-600 p-2 rounded">Login</button>
-        </div>
-      )}
+         <div style={containerStyle} className="text-center flex flex-col justify-center items-center ">
+         <h1 className="font-kaint font-bold text-white text-9xl font-kanit">To-Do list</h1>
+         <p className="text-white font-semibold font-kanit">Please log in to access the app.</p>
+         <button onClick={openLoginModal} className="bg-green-600 p-2 rounded border-none text-white">Login</button>
+       </div>
+      )}   
     </AuthContext.Provider>
   );
 };

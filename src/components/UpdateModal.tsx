@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Task } from "./Body/List";
+import { useAuth } from "./AuthProvider";
 export interface buttons {
   updateId: number;
   newTodos?: Task[];
@@ -24,6 +25,7 @@ const UpdateModal: React.FC<buttons> = ({
   const [title, setTitle] = useState<string>("");
   const [completed, setCompleted] = useState<boolean>(false);
   const [taskId, setTaskId] = useState<number>(0);
+  const {userId} = useAuth();
   // const [updatedTask, setUpdatedTask] = useState<Task[]>([]);
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const UpdateModal: React.FC<buttons> = ({
 
   const handleUpdate = () => {
     const updatedTodo: Todo = {
-      userId: 11,
+      userId: userId || 0,
       id: taskId,
       title: title,
       completed: completed,
