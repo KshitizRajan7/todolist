@@ -26,7 +26,7 @@ interface ListProps {
   handleCheckboxChange: (id: number) => void;
 }
 
-const List: React.FC<ListProps> = React.memo (({
+const List: React.FC<ListProps> = React.memo (function List({
   userId,
   handleCheckboxChange,
   newTodos,
@@ -34,7 +34,7 @@ const List: React.FC<ListProps> = React.memo (({
   selectTask,
   handleUpdate,
   handleRemove,
-}) => {
+})  {
   const [hoveredTaskId, setHoveredTaskId] = useState<number | null>(null); //the type annotation <number | null> defines that hoveredTaskId can be number or
   //null is initilized to mkae sure that no task was hovered.
 
