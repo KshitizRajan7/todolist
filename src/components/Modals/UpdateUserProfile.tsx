@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import CryptoJS from "crypto-js"; // Ensure you have this library for hashing
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "../AuthProvider";
 
 export type User = {
   userID: number;
@@ -140,7 +140,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ user, onClose }) => {
                 {showNewPassword ? "Hide" : "Show"}
               </button>
             </div>
-            <div className="relative ">
+            <div className="relative">
               <input
                 className="border w-[310px] h-[30px] md:w-[440px] md:h-[38px] mb-2 outline-none rounded-[5px] px-[8px] py-[16px] dark:text-white dark:bg-gray-900"
                 type={showConfirmPassword ? "text" : "password"}

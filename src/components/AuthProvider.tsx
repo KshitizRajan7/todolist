@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect, createContext, useContext, useCallback } from "react";
 import CryptoJS from "crypto-js";
-import LoginModal from "@/components/LoginModal";
-import RegistrationModal from "./RegistrationModal";
+import LoginModal from "@/components/Modals/LoginModal";
+import RegistrationModal from "./Modals/RegistrationModal";
 import bg from  '../image/todolistwall1.jpg'
 
 interface User {

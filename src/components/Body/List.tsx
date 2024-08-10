@@ -130,7 +130,10 @@ const List: React.FC<ListProps> = React.memo (function List({
           renderTasks(filteredTasksBySelect)
         ) : (
           <div className="md:w-[221px] md:h-[174px]">
-            <Image src={detective.src} alt="No task" />
+            <Image src={detective.src}  
+    width={400} // Replace with your desired width
+    height={400} // Replace with your desired height
+     alt="No task" />
             <div className="flex justify-center items-center ">
               <p className="md:w-[69px] md:h-[20px] font-normal font-kaint dark:text-white text-black text-[20px] leading-5">
                 Empty...

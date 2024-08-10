@@ -5,8 +5,8 @@ import Select from "./Select";
 import ColorScheme from "./ColorScheme";
 import { headerProp } from "./Head";
 import { useAuth } from "../AuthProvider";
-import UpdateUserProfile, { User} from "../UpdateUserProfile";
-import DeleteUserProfile from "../DeleteUserProfile";
+import UpdateUserProfile, { User} from "../Modals/UpdateUserProfile";
+import DeleteUserProfile from "../Modals/DeleteUserProfile";
 
 
 const Header: React.FC<headerProp> = ({ onSearch, onSelect }) => {

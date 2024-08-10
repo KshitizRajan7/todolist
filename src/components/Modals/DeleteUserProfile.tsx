@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import CryptoJS from "crypto-js"; // Ensure you have this library for hashing
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "../AuthProvider";
 
 export type User = {
   userID: number;
@@ -79,7 +79,7 @@ const UpdateModal: React.FC<DeleteModalProps> = ({ user, onClose }) => {
                   borderColor: "rgba(108, 99, 255, 1)",
                   color: "rgba(108, 99, 255, 1)",
                 }}
-                onClick={() => onClose()}
+                onClick={() => onClose()} 
               >
                 CANCEL
               </button>

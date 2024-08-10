@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Task } from "./Body/List";
-import { useAuth } from "./AuthProvider";
+import { Task } from "../Body/List";
+import { useAuth } from "../AuthProvider";
 export interface buttons {
   updateId: number;
   newTodos?: Task[];

@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import List, { Task } from "./List";
 import AddButton from "./AddButton";
-import Modal, { Todo } from "../Modal";
-import UpdateModal from "../UpdateModal";
+import Modal, { Todo } from "../Modals/AddTaskModal";
+import UpdateModal from "../Modals/UpdateModal";
 import { useAuth } from "../AuthProvider";
 
 interface BodyProps {
